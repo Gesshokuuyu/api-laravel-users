@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
-use Laravel\Sanctum\Sanctum;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $validated = $request->validate([
-            'name' =>  'required|string|max:100',
-            'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|min:6|confirmed'
-        ]);
+        $validated = $request->validated();
+        $validated = $request->safe()->only(['name', 'email', 'password']);
 
         $user = User::create([
             'name' => $validated['name'],
@@ -35,12 +33,10 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $validated = $request->validate([
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|min:6'
-        ]);
+        $validated = $request->validated();
+        $validated = $request->safe()->only(['email', 'password']);
 
         if (Auth::attempt($validated)){
             $user = User::where('email', $validated['email'])->firstOrFail();
@@ -52,7 +48,6 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $token
             ]);
-
         }
 
         return response()->json([
