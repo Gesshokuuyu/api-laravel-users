@@ -1,18 +1,17 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+})->middleware(['throttle:api', 'auth:sanctum']);
 
 Route::prefix('auth')->group(function() {
     Route::post("/register", [AuthController::class, 'register']);
     Route::post("/login",    [AuthController::class, 'login']);
     Route::post("/logout",   [AuthController::class, 'logout']);
-});
+})->middleware(['throttle:api']);
 
 
