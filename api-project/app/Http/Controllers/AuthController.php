@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
 
 class AuthController extends Controller
 {
@@ -30,7 +32,7 @@ class AuthController extends Controller
             'success' => true,
             'user' => $user,
             'token' => $token
-        ]);
+        ], 201);
     }
 
     public function login(Request $request)
@@ -43,7 +45,14 @@ class AuthController extends Controller
         if (Auth::attempt($validated)){
             $user = User::where('email', $validated['email'])->firstOrFail();
 
-            dd($user);
+            $token = $user->createToken('api-token', ['post.read', 'post.create'])->plainTextToken;
+
+            return response()->json([
+                'success' => true,
+                'user' => $user,
+                'token' => $token
+            ]);
+
         }
 
         return response()->json([
@@ -55,6 +64,29 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $token = $request->bearerToken();
 
+        if(!$token){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'Token não informado'
+            ], 400);
+        }
+
+        $access_token = PersonalAccessToken::findToken($token);
+
+        if(!$access_token){
+            return response()->json([
+                'success' => false,
+                'msg'     => 'Token fornecido inválido ou já expirado.'
+            ], 400);
+        }
+
+        $access_token->delete();
+
+        return response()->json([
+            'success' => true,
+            'msg' => "Logout realizado com sucesso."
+        ]);
     }
 }
