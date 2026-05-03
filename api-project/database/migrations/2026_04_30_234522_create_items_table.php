@@ -20,7 +20,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete(); //seller
 
-            $table->string("name", 255);
+            $table->string("name", 100);
             $table->string("code", 35)->unique();
             $table->decimal("price", 10, 2);
             $table->integer("available_stock");
