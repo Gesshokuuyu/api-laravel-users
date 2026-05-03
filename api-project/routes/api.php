@@ -14,4 +14,3 @@ Route::prefix('auth')->group(function() {
     Route::post("/logout",   [AuthController::class, 'logout']);
 })->middleware(['throttle:api']);
 
-
