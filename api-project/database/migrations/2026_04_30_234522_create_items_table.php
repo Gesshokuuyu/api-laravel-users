@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->timestamps();
 
             $table->foreignIdFor(User::class)
@@ -21,11 +21,13 @@ return new class extends Migration
                 ->cascadeOnDelete(); //seller
 
             $table->string("name", 100);
-            $table->string("code", 35)->unique();
+            $table->string("code", 35)->unique()->index();
             $table->decimal("price", 10, 2);
             $table->integer("available_stock");
             $table->text("description");
             $table->softDeletes();
+
+
         });
     }
 

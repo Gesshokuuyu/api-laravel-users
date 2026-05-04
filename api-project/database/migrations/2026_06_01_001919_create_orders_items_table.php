@@ -14,9 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders_items', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->timestamps();
             $table->foreignIdFor(Orders::class, 'order_id')
+                ->index()
                 ->constrained('orders')
                 ->cascadeOnDelete();
 

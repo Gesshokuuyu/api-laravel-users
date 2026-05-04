@@ -16,13 +16,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->timestamps();
             $table->integer("num_order_seller");
             $table->unique(['num_order_seller', 'seller_id']);
 
             $table->foreignIdFor(User::class, 'buyer_id')->constrained('users')->restrictOnDelete();
-            $table->foreignIdFor(User::class, 'seller_id')->constrained('users')->restrictOnDelete();
+            $table->foreignIdFor(User::class, 'seller_id')->index()->constrained('users')->restrictOnDelete();
 
             $table->foreignIdFor(Addresses::class, 'shipping_addresses_id')->constrained('addresses');
             $table->foreignIdFor(ShippingCompanies::class, 'shipping_company_id')->constrained('shipping_companies');

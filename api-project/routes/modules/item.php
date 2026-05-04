@@ -12,6 +12,6 @@ Route::prefix('items')
         Route::get("/{item}", [ItemController::class, 'show'])->name("item.show");
 
         Route::post('/create', [ItemController::class, 'create'])->name('item.create');
-        
+
     });
 

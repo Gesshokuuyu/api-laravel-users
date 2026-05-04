@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -32,7 +33,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function ordersAsBuyer(): HasMany 
+    public function ordersAsBuyer(): HasMany
     {
         return $this->hasMany(Orders::class, 'buyer_id');
     }
@@ -40,5 +41,25 @@ class User extends Authenticatable
     public function ordersAsSeller(): HasMany
     {
         return $this->hasMany(Orders::class, 'seller_id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Addresses::class);
+    }
+
+    public function shoppingCarts(): HasMany
+    {
+        return $this->hasMany(ShoppingCart::class);
+    }
+
+    public function seller(): HasOne
+    {
+        return $this->hasOne(Seller::class, 'user_id');
     }
 }

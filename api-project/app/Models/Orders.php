@@ -39,4 +39,8 @@ class Orders extends Model
         return $this->hasMany(OrdersItems::class, "order_id");
     }
 
+    public function audits(): HasMany
+    {
+        return $this->hasMany(OrderAudit::class, 'order_id');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Coupons;
 use App\Models\Item;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -20,12 +21,12 @@ return new class extends Migration
             $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignIdFor(Item::class)
-                ->constrained()
-                ->cascadeOnDelete();
 
-            $table->integer("amount");
-            $table->unique(['user_id', 'item_id']);
+            $table->enum("status",[
+                'pending',
+                'clear',
+                'processing'
+            ]);
         });
     }
 

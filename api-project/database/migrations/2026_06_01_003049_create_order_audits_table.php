@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Orders;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer("register_id");
+            $table->foreignIdFor(Orders::class, 'order_id')->index()->constrained("orders")->cascadeOnDelete();
             $table->string("title", 150);
             $table->string("subtitle", 200);
 
