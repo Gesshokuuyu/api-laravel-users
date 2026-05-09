@@ -1,66 +1,99 @@
-# 🚀 API Laravel Users
+# �️ Sistema de Vendas - API REST
 
-Uma API RESTful moderna e robusta para gerenciamento de autenticação de usuários, desenvolvida com **Laravel 13** e **Laravel Sanctum**. Projeto criado para aprimorar habilidades em desenvolvimento backend com Laravel, pronto para ser consumido por aplicações frontend.
+Uma API RESTful moderna e robusta para gerenciamento completo de um sistema de vendas online, desenvolvida com **Laravel 13** e **Laravel Sanctum**. Projeto criado para aprimorar habilidades em desenvolvimento backend com Laravel, implementando autenticação, gerenciamento de produtos, carrinho de compras, pedidos e muito mais.
 
 <div align="center">
 
 ![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel)
 ![PHP](https://img.shields.io/badge/PHP-8.3+-777BB4?style=for-the-badge&logo=php)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-## 📋 Sumário
+## 📋 Índice
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias](#🛠-tecnologias)
-- [Pré-requisitos](#pré-requisitos)
-- [Instalação](#instalação)
-- [Configuração](#configuração)
-- [Executando a API](#executando-a-api)
-- [Endpoints](#endpoints)
-- [Exemplos de Uso](#exemplos-de-uso)
-- [Autenticação](#autenticação)
-- [Testes](#testes)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias](#-tecnologias)
+- [Pré-requisitos](#-pré-requisitos)
+- [Instalação](#-instalação)
+- [Configuração](#-configuração)
+- [Executando a API](#-executando-a-api)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Endpoints Principais](#-endpoints-principais)
+- [Autenticação](#-autenticação)
+- [Testes](#-testes)
+- [Licença](#-licença)
 
 ---
 
 ## 💡 Sobre o Projeto
 
-API REST desenvolvida com o objetivo de praticar e consolidar conhecimentos em:
+API REST desenvolvida com o objetivo de praticar e consolidar conhecimentos em desenvolvimento de sistemas complexos com Laravel. O projeto simula um e-commerce completo com funcionalidades de vendas, gestão de inventário e carrinho de compras.
 
-- ✅ Desenvolvimento de APIs RESTful com Laravel
+**Propósito**: Estudo e aprendizado prático em:
+- ✅ Desenvolvimento de APIs RESTful escaláveis
 - ✅ Autenticação segura com JWT/Tokens (Laravel Sanctum)
-- ✅ Validação de dados com Form Requests
-- ✅ Estrutura MVC e padrões de design
+- ✅ Modelagem de dados complexos
+- ✅ Validação robusta com Form Requests
+- ✅ Relacionamentos Eloquent (1:1, 1:N, N:N)
+- ✅ Policies e autorização granular
+- ✅ Testes automatizados com Pest
 - ✅ Boas práticas de segurança e performance
-- ✅ Documentação e testes automatizados
-
-Preparada para ser consumida por aplicações frontend modernas (React, Vue, Angular, etc).
 
 ---
 
-## 🛠 Tecnologias
+## 🎯 Funcionalidades
+
+### Módulo de Usuários
+- 👤 Registro e login de usuários
+- 🔐 Autenticação com Sanctum
+- 📝 Perfil de usuário e edição de dados
+- 🛡️ Controle de permissões e roles
+
+### Módulo de Produtos
+- 📦 Criação e gerenciamento de produtos
+- 🏷️ Categorização e filtros
+- 📊 Controle de estoque e variações
+- ⭐ Sistema de avaliações
+
+### Módulo de Carrinho de Compras
+- 🛒 Adicionar/remover itens do carrinho
+- 💾 Persistência de carrinho por usuário
+- 🔄 Atualização de quantidade e preços
+
+### Módulo de Pedidos
+- 📋 Criação e rastreamento de pedidos
+- 📍 Gerenciamento de endereços de entrega
+- 🚚 Integração com transportadoras
+- 📊 Histórico e auditoria de pedidos
+
+### Módulo de Vendedores
+- 👨‍💼 Gerenciamento de múltiplos vendedores
+- 📈 Controle de vendas por vendedor
+- 💰 Gestão de coupons e descontos
+
+---
+
+## 🛠️ Tecnologias
 
 | Tecnologia | Versão | Descrição |
 |-----------|--------|-----------|
 | **Laravel** | ^13.0 | Framework PHP moderno |
 | **PHP** | ^8.3 | Linguagem de programação |
+| **MySQL** | 8.0+ | Banco de dados relacional |
 | **Laravel Sanctum** | ^4.0 | Autenticação API com tokens |
 | **Pest** | ^4.6 | Framework de testes moderno |
 | **Composer** | Latest | Gerenciador de dependências PHP |
 
-### Dependências de Desenvolvimento
+### Dependências Principais
 
-- **Faker** - Geração de dados fake para testes
-- **PHPUnit** - Framework de testes
-- **Pint** - PHP Linter moderno
+- **Faker** - Geração de dados fake para testes e seeders
+- **Laravel Tinker** - REPL interativo para debugging
+- **Pint** - PHP Linter e formatador
 - **Collision** - Manipulador de exceções aprimorado
 - **Pail** - Visualizador de logs em tempo real
 
@@ -73,7 +106,7 @@ Antes de começar, certifique-se de ter instalado:
 - **PHP 8.3+** ([Download](https://www.php.net/downloads))
 - **Composer** ([Download](https://getcomposer.org/download/))
 - **Git** ([Download](https://git-scm.com/downloads))
-- **SQLite** ou **MySQL/MariaDB** (opcional, para banco de dados)
+- **MySQL 8.0+** ([Download](https://www.mysql.com/downloads/)) ou **MariaDB**
 
 ### Verificar Instalação
 
@@ -81,6 +114,7 @@ Antes de começar, certifique-se de ter instalado:
 php -v
 composer -v
 git -v
+mysql -V
 ```
 
 ---
@@ -130,6 +164,8 @@ php artisan db:seed
 
 ### Variáveis de Ambiente (.env)
 
+Copie o arquivo `.env.example` e configure as variáveis necessárias:
+
 ```env
 APP_NAME=
 APP_ENV=
@@ -152,12 +188,11 @@ SANCTUM_STATEFUL_DOMAINS=localhost:3000,localhost:8000
 
 ### Configuração do CORS (opcional)
 
-Edite `config/cors.php` para permitir requisições do seu frontend:
+O CORS já vem pré-configurado em `config/cors.php`. Para desenvolvimento local com frontend em outra porta:
 
 ```php
-'allowed_origins' => ['http://localhost:3000'],
-'allowed_methods' => ['*'],
-'allowed_headers' => ['*'],
+// config/cors.php
+'allowed_origins' => ['localhost:3000', 'localhost:5173'], // Vite, React, Vue, etc
 ```
 
 ---
@@ -180,21 +215,106 @@ php artisan serve --port=8001
 
 ---
 
-## 🔌 Endpoints
+---
 
-### 📝 Autenticação
+## 📡 Endpoints Principais
 
-#### Registrar Novo Usuário
+### 🔑 Autenticação
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `POST` | `/api/auth/register` | Registrar novo usuário |
+| `POST` | `/api/auth/login` | Fazer login |
+| `POST` | `/api/auth/logout` | Fazer logout |
+
+### 📦 Produtos
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/items` | Listar produtos |
+| `GET` | `/api/items/{id}` | Detalhes do produto |
+| `POST` | `/api/items` | Criar produto (Admin) |
+| `PUT` | `/api/items/{id}` | Atualizar produto (Admin) |
+| `DELETE` | `/api/items/{id}` | Deletar produto (Admin) |
+
+### 🛒 Carrinho de Compras
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/shopping-cart` | Obter carrinho do usuário |
+| `POST` | `/api/shopping-cart/items` | Adicionar item ao carrinho |
+| `PUT` | `/api/shopping-cart/items/{id}` | Atualizar quantidade |
+| `DELETE` | `/api/shopping-cart/items/{id}` | Remover item do carrinho |
+
+### 📋 Pedidos
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/orders` | Listar pedidos do usuário |
+| `POST` | `/api/orders` | Criar novo pedido |
+| `GET` | `/api/orders/{id}` | Detalhes do pedido |
+| `GET` | `/api/orders/{id}/items` | Itens do pedido |
+
+### 👨‍💼 Vendedores
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/sellers` | Listar vendedores |
+| `GET` | `/api/sellers/{id}` | Detalhes do vendedor |
+
+### 📍 Endereços
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `GET` | `/api/addresses` | Listar endereços do usuário |
+| `POST` | `/api/addresses` | Criar novo endereço |
+| `PUT` | `/api/addresses/{id}` | Atualizar endereço |
+| `DELETE` | `/api/addresses/{id}` | Deletar endereço |
+
+---
+
+### Exemplo de Requisição: Listar Produtos
 
 ```http
-POST /api/auth/register
+GET /api/items?page=1&per_page=15
+Authorization: Bearer {token}
+```
+
+**Resposta (200 OK):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "Notebook Dell XPS 13",
+      "description": "Notebook de alta performance",
+      "price": 5999.99,
+      "stock": 15,
+      "seller_id": 1,
+      "created_at": "2026-04-28T10:30:00.000000Z"
+    }
+  ],
+  "meta": {
+    "current_page": 1,
+    "total": 42,
+    "per_page": 15
+  }
+}
+```
+
+---
+
+### Exemplo de Requisição: Adicionar ao Carrinho
+
+```http
+POST /api/shopping-cart/items
+Authorization: Bearer {token}
 Content-Type: application/json
 
 {
-  "name": "João Silva",
-  "email": "joao@example.com",
-  "password": "senha123456",
-  "password_confirmation": "senha123456"
+  "item_id": 1,
+  "quantity": 2
 }
 ```
 
@@ -202,82 +322,44 @@ Content-Type: application/json
 ```json
 {
   "success": true,
-  "message": "Usuário registrado com sucesso",
+  "message": "Produto adicionado ao carrinho",
   "data": {
-    "user": {
-      "id": 1,
-      "name": "João Silva",
-      "email": "joao@example.com"
-    },
-    "token": "2|AbCdEfGhIjKlMnOpQrStUvWxYz..."
+    "id": 15,
+    "shopping_cart_id": 3,
+    "item_id": 1,
+    "quantity": 2,
+    "unit_price": 5999.99
   }
 }
 ```
 
 ---
 
-#### Fazer Login
+### Exemplo de Requisição: Criar Pedido
 
 ```http
-POST /api/auth/login
+POST /api/orders
+Authorization: Bearer {token}
 Content-Type: application/json
 
 {
-  "email": "joao@example.com",
-  "password": "senha123456"
+  "address_id": 5,
+  "shipping_company_id": 2
 }
 ```
 
-**Resposta (200 OK):**
+**Resposta (201 Created):**
 ```json
 {
   "success": true,
-  "message": "Login realizado com sucesso",
+  "message": "Pedido criado com sucesso",
   "data": {
-    "user": {
-      "id": 1,
-      "name": "João Silva",
-      "email": "joao@example.com"
-    },
-    "token": "2|AbCdEfGhIjKlMnOpQrStUvWxYz..."
+    "id": 123,
+    "user_id": 1,
+    "status": "pending",
+    "total_value": 11999.98,
+    "created_at": "2026-04-28T10:30:00.000000Z"
   }
-}
-```
-
----
-
-#### Fazer Logout
-
-```http
-POST /api/auth/logout
-Authorization: Bearer {token}
-```
-
-**Resposta (200 OK):**
-```json
-{
-  "success": true,
-  "message": "Logout realizado com sucesso"
-}
-```
-
----
-
-#### Obter Usuário Autenticado
-
-```http
-GET /api/user
-Authorization: Bearer {token}
-```
-
-**Resposta (200 OK):**
-```json
-{
-  "id": 1,
-  "name": "João Silva",
-  "email": "joao@example.com",
-  "created_at": "2026-04-28T10:30:00.000000Z",
-  "updated_at": "2026-04-28T10:30:00.000000Z"
 }
 ```
 
