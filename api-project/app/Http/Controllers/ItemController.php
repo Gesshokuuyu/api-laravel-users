@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemRequest;
 use App\Http\Resources\ItemResource;
 use App\Models\Item;
+use App\Models\ItemSupply;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Throwable;
@@ -53,15 +54,19 @@ class ItemController extends Controller
         $validated = $request->safe()->only(['name', 'code', 'description', 'price', 'stock']);
 
         try{
-            Item::create([
+            $item = Item::create([
                 'name'              => $validated['name'],
                 'code'              => $validated['code'],
                 'description'       => $validated['description'],
                 'price'             => $validated['price'],
-                'available_stock'   => $validated['stock'],
                 'user_id'           => $request->user()->id
             ]);
-        }catch(Throwable){
+
+            ItemSupply::create([
+                "quantity_available"  => $validated['stock'],
+                "item_id"           => $item->id
+            ]);
+        }catch(Throwable $th){
             return response()->json([
                 'success' => false,
                 'msg'     => 'Ocorreu um erro ao cadastrar o item, tente novamente mais tarde.'

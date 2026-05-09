@@ -4,4 +4,5 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/modules/auth.php';
 require __DIR__ . '/modules/item.php';
+require __DIR__ . '/modules/cart.php';
 

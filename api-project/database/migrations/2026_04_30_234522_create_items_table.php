@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string("name", 100);
             $table->string("code", 35)->unique()->index();
             $table->decimal("price", 10, 2);
-            $table->integer("available_stock");
             $table->text("description");
             $table->softDeletes();
 

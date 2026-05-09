@@ -53,9 +53,9 @@ class User extends Authenticatable
         return $this->hasMany(Addresses::class);
     }
 
-    public function shoppingCarts(): HasMany
+    public function shoppingCart(): HasOne
     {
-        return $this->hasMany(ShoppingCart::class);
+        return $this->hasOne(ShoppingCart::class, 'user_id');
     }
 
     public function seller(): HasOne

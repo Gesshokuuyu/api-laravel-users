@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Coupons;
 use App\Models\Item;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,19 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shopping_carts', function (Blueprint $table) {
+        Schema::create('item_supplies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->foreignIdFor(User::class)
-                ->constrained()
-                ->cascadeOnDelete();
+            $table->integer("quantity_available");
+            $table->integer("used")->default(0);
 
-            $table->enum("status",[
-                'pending',
-                'clear',
-                'processing'
-            ])->default('clear');
+            $table->foreignIdFor(Item::class)->constrained("items")
+                                             ->cascadeOnDelete()
+                                             ->unique();
+
         });
     }
 
@@ -35,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shopping_carts');
+        Schema::dropIfExists('item_supplies');
     }
 };
