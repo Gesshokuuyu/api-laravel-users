@@ -41,6 +41,8 @@ class AuthController extends Controller
         if (Auth::attempt($validated)){
             $user = User::where('email', $validated['email'])->firstOrFail();
 
+            $user->tokens()->delete();
+
             $token = $user->createToken('api-token', ['post.read', 'post.create'])->plainTextToken;
 
             return response()->json([
