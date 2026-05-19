@@ -24,7 +24,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
 
-        $token = $user->createToken('api-token', ['post.read', 'post.create'])->plainTextToken;
+        $token = $user->createToken('api-token', ['catalog.read', 'item.addToCart'])->plainTextToken;
 
         return response()->json([
             'success' => true,
@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             $user->tokens()->delete();
 
-            $token = $user->createToken('api-token', ['post.read', 'post.create'])->plainTextToken;
+            $token = $user->createToken('api-token', ['catalog.read', 'item.addToCart'])->plainTextToken;
 
             return response()->json([
                 'success' => true,

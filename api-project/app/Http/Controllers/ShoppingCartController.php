@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartAddRequest;
+use App\Http\Requests\RemoveCartItemRequest;
 use App\Http\Resources\ShoppingCartResource;
 use App\Models\Item;
 use App\Models\ShoppingCart;
@@ -90,5 +91,29 @@ class ShoppingCartController extends Controller
             'success' => true,
             'msg'     => 'Carrinho atualizado.'
         ], 201);
+    }
+
+    public function remove(RemoveCartItemRequest $request)
+    {
+        $validated = $request->validated();
+
+
+        $itemOnCart = ShoppingCartItems::where('item_id', $validated['cart_item'])
+                                ->where('cart_id', $request->user()->shoppingCart->id)
+                                ->first();
+
+        try {
+            $itemOnCart->delete();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'msg' => "Erro ao deletar item, tente novamente mais tarde."
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => true,
+            'msg'     => "Item removido do carrinho com sucesso."
+        ]);
     }
 }

@@ -10,4 +10,6 @@ Route::prefix('/cart')
         Route::get('/', [ShoppingCartController::class, 'index'])->name('cart.index');
 
         Route::post("/addToCart", [ShoppingCartController::class, "addToCart"])->name('cart.addItem');
+
+        Route::delete('/remove', [ShoppingCartController::class, "remove"])->name("cart.removeItem");
     });
